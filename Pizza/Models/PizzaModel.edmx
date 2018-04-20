@@ -1,0 +1,1184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PizzaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="AdminId" />
+          </Key>
+          <Property Name="AdminId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Base">
+          <Key>
+            <PropertyRef Name="BaseId" />
+          </Key>
+          <Property Name="BaseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SizeOfPizza" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="percentage" Type="numeric" Precision="5" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CoolDrink">
+          <Key>
+            <PropertyRef Name="DrinkId" />
+          </Key>
+          <Property Name="DrinkId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Flavour" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Add" Type="numeric" Precision="5" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Surname" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="DateOfBirth" Type="date" Nullable="false" />
+          <Property Name="EmailAddress" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="PhysicalAddress" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="PrimarySchool" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Repassword" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DeliveryMethod">
+          <Key>
+            <PropertyRef Name="DeliveryId" />
+          </Key>
+          <Property Name="DeliveryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Delivery" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="DeliveryAddress" Type="varchar" MaxLength="100" />
+          <Property Name="ContactNumber" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Feedback">
+          <Key>
+            <PropertyRef Name="FeedbackId" />
+          </Key>
+          <Property Name="FeedbackId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Subject" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Comment" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="EmailAddress" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderDate" Type="datetime" Nullable="false" />
+          <Property Name="CustId" Type="int" Nullable="false" />
+          <Property Name="Payment_type" Type="varchar" MaxLength="20" />
+          <Property Name="DeliveryId" Type="int" Nullable="false" />
+          <Property Name="PizzaId" Type="int" />
+          <Property Name="BaseId" Type="int" />
+          <Property Name="ToppingId" Type="int" />
+          <Property Name="DrinkId" Type="int" />
+        </EntityType>
+        <EntityType Name="Pizza">
+          <Key>
+            <PropertyRef Name="PizzaId" />
+          </Key>
+          <Property Name="PizzaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PizzaName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PizzaPrice" Type="numeric" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Topping">
+          <Key>
+            <PropertyRef Name="TopId" />
+          </Key>
+          <Property Name="TopId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Price" Type="numeric" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Pizza.dbo.DrinkPrice' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DrinkPrice">
+          <Key>
+            <PropertyRef Name="Flavour" />
+            <PropertyRef Name="Add" />
+          </Key>
+          <Property Name="Flavour" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Add" Type="numeric" Precision="5" Scale="2" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Pizza.dbo.OrderHistory' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="OrderHistory">
+          <Key>
+            <PropertyRef Name="Title" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="OrderId" />
+            <PropertyRef Name="OrderDate" />
+            <PropertyRef Name="PizzaName" />
+            <PropertyRef Name="PizzaPrice" />
+            <PropertyRef Name="SizeOfPizza" />
+            <PropertyRef Name="percentage" />
+            <PropertyRef Name="Description" />
+            <PropertyRef Name="Price" />
+            <PropertyRef Name="Flavour" />
+            <PropertyRef Name="Add" />
+            <PropertyRef Name="Delivery" />
+            <PropertyRef Name="Expr1" />
+            <PropertyRef Name="ContactNumber" />
+            <PropertyRef Name="Surname" />
+          </Key>
+          <Property Name="Title" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="OrderId" Type="int" Nullable="false" />
+          <Property Name="OrderDate" Type="datetime" Nullable="false" />
+          <Property Name="PizzaName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PizzaPrice" Type="numeric" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="SizeOfPizza" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="percentage" Type="numeric" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="numeric" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="Flavour" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Add" Type="numeric" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="Delivery" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Expr1" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="DeliveryAddress" Type="varchar" MaxLength="100" />
+          <Property Name="ContactNumber" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Total Amount" Type="numeric" Precision="38" Scale="2" />
+          <Property Name="Surname" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Pizza.dbo.ViewBase' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ViewBase">
+          <Key>
+            <PropertyRef Name="SizeOfPizza" />
+            <PropertyRef Name="percentage" />
+          </Key>
+          <Property Name="SizeOfPizza" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="percentage" Type="numeric" Precision="5" Scale="2" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Pizza.dbo.ViewCustomers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ViewCustomers">
+          <Key>
+            <PropertyRef Name="Title" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Surname" />
+            <PropertyRef Name="DateOfBirth" />
+            <PropertyRef Name="EmailAddress" />
+            <PropertyRef Name="PhysicalAddress" />
+            <PropertyRef Name="PrimarySchool" />
+            <PropertyRef Name="Password" />
+            <PropertyRef Name="Repassword" />
+          </Key>
+          <Property Name="Title" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Surname" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="DateOfBirth" Type="date" Nullable="false" />
+          <Property Name="EmailAddress" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="PhysicalAddress" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="PrimarySchool" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Repassword" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Pizza.dbo.ViewFeedback' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ViewFeedback">
+          <Key>
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Subject" />
+            <PropertyRef Name="Comment" />
+            <PropertyRef Name="EmailAddress" />
+            <PropertyRef Name="PhoneNumber" />
+          </Key>
+          <Property Name="Name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Subject" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Comment" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="EmailAddress" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Pizza.dbo.ViewPizza' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ViewPizza">
+          <Key>
+            <PropertyRef Name="PizzaName" />
+            <PropertyRef Name="PizzaPrice" />
+          </Key>
+          <Property Name="PizzaName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PizzaPrice" Type="numeric" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Pizza.dbo.ViewTopping' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ViewTopping">
+          <Key>
+            <PropertyRef Name="Description" />
+            <PropertyRef Name="Price" />
+          </Key>
+          <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="numeric" Precision="5" Scale="2" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Order_">
+          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="Order1" Type="Self.Order" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="Order1">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Base">
+          <End Role="Base" Type="Self.Base" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Base">
+              <PropertyRef Name="BaseId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="BaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="CustId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Drink">
+          <End Role="CoolDrink" Type="Self.CoolDrink" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoolDrink">
+              <PropertyRef Name="DrinkId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="DrinkId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_OrderMethod">
+          <End Role="DeliveryMethod" Type="Self.DeliveryMethod" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeliveryMethod">
+              <PropertyRef Name="DeliveryId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="DeliveryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Pizza">
+          <End Role="Pizza" Type="Self.Pizza" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pizza">
+              <PropertyRef Name="PizzaId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="PizzaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Topping">
+          <End Role="Topping" Type="Self.Topping" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Topping">
+              <PropertyRef Name="TopId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="ToppingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="AdminLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserName" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="CustomerOrderHistory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmailAddress" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="DeleteCustomer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmailAddress" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="DeleteOrderHistory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="OrderId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetPriceOnSelectedFlavour" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Flavour" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetPriceOnSizeSelected" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="size" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetPriceOnToppingSelected" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="topping" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="InsertCustomer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Title" Type="varchar" Mode="In" />
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="Surname" Type="varchar" Mode="In" />
+          <Parameter Name="DateOfBirth" Type="date" Mode="In" />
+          <Parameter Name="EmailAddress" Type="varchar" Mode="In" />
+          <Parameter Name="PhysicalAddress" Type="varchar" Mode="In" />
+          <Parameter Name="PrimarySchool" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="nvarchar" Mode="In" />
+          <Parameter Name="Repassword" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmailAddress" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="ResetPassord" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmailAddress" Type="varchar" Mode="In" />
+          <Parameter Name="PrimarySchool" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+          <Parameter Name="Repassword" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SaveDeliveryDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Delivery" Type="varchar" Mode="In" />
+          <Parameter Name="Address" Type="varchar" Mode="In" />
+          <Parameter Name="Number" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SaveOrder" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="int" Mode="In" />
+          <Parameter Name="DeliveryMethodId" Type="int" Mode="In" />
+          <Parameter Name="BaseId" Type="int" Mode="In" />
+          <Parameter Name="DrinkId" Type="int" Mode="In" />
+          <Parameter Name="ToppingId" Type="int" Mode="In" />
+          <Parameter Name="PizzaId" Type="int" Mode="In" />
+          <Parameter Name="Date" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="SelectedPizza" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PizzaName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SendFeedback" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="Subject" Type="varchar" Mode="In" />
+          <Parameter Name="Comment" Type="varchar" Mode="In" />
+          <Parameter Name="EmailAddress" Type="varchar" Mode="In" />
+          <Parameter Name="PhoneNumber" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="UpdateCoolDrink" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Flavour" Type="varchar" Mode="In" />
+          <Parameter Name="PizzaPrice" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdatePizzaPrice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PizzaName" Type="varchar" Mode="In" />
+          <Parameter Name="PizzaPrice" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdatePizzaTopping" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PizzaTopping" Type="varchar" Mode="In" />
+          <Parameter Name="PizzaPrice" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateSizePrice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PizzaSize" Type="varchar" Mode="In" />
+          <Parameter Name="PizzaPrice" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="PizzaModelStoreContainer">
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Base" EntityType="Self.Base" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CoolDrink" EntityType="Self.CoolDrink" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DeliveryMethod" EntityType="Self.DeliveryMethod" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Feedback" EntityType="Self.Feedback" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pizza" EntityType="Self.Pizza" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Topping" EntityType="Self.Topping" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DrinkPrice" EntityType="Self.DrinkPrice" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DrinkPrice].[Flavour] AS [Flavour], 
+    [DrinkPrice].[Add] AS [Add]
+    FROM [dbo].[DrinkPrice] AS [DrinkPrice]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="OrderHistory" EntityType="Self.OrderHistory" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [OrderHistory].[Title] AS [Title], 
+    [OrderHistory].[Name] AS [Name], 
+    [OrderHistory].[OrderId] AS [OrderId], 
+    [OrderHistory].[OrderDate] AS [OrderDate], 
+    [OrderHistory].[PizzaName] AS [PizzaName], 
+    [OrderHistory].[PizzaPrice] AS [PizzaPrice], 
+    [OrderHistory].[SizeOfPizza] AS [SizeOfPizza], 
+    [OrderHistory].[percentage] AS [percentage], 
+    [OrderHistory].[Description] AS [Description], 
+    [OrderHistory].[Price] AS [Price], 
+    [OrderHistory].[Flavour] AS [Flavour], 
+    [OrderHistory].[Add] AS [Add], 
+    [OrderHistory].[Delivery] AS [Delivery], 
+    [OrderHistory].[Expr1] AS [Expr1], 
+    [OrderHistory].[DeliveryAddress] AS [DeliveryAddress], 
+    [OrderHistory].[ContactNumber] AS [ContactNumber], 
+    [OrderHistory].[Total Amount] AS [Total Amount], 
+    [OrderHistory].[Surname] AS [Surname]
+    FROM [dbo].[OrderHistory] AS [OrderHistory]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ViewBase" EntityType="Self.ViewBase" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ViewBase].[SizeOfPizza] AS [SizeOfPizza], 
+    [ViewBase].[percentage] AS [percentage]
+    FROM [dbo].[ViewBase] AS [ViewBase]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ViewCustomers" EntityType="Self.ViewCustomers" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ViewCustomers].[Title] AS [Title], 
+    [ViewCustomers].[Name] AS [Name], 
+    [ViewCustomers].[Surname] AS [Surname], 
+    [ViewCustomers].[DateOfBirth] AS [DateOfBirth], 
+    [ViewCustomers].[EmailAddress] AS [EmailAddress], 
+    [ViewCustomers].[PhysicalAddress] AS [PhysicalAddress], 
+    [ViewCustomers].[PrimarySchool] AS [PrimarySchool], 
+    [ViewCustomers].[Password] AS [Password], 
+    [ViewCustomers].[Repassword] AS [Repassword]
+    FROM [dbo].[ViewCustomers] AS [ViewCustomers]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ViewFeedback" EntityType="Self.ViewFeedback" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ViewFeedback].[Name] AS [Name], 
+    [ViewFeedback].[Subject] AS [Subject], 
+    [ViewFeedback].[Comment] AS [Comment], 
+    [ViewFeedback].[EmailAddress] AS [EmailAddress], 
+    [ViewFeedback].[PhoneNumber] AS [PhoneNumber]
+    FROM [dbo].[ViewFeedback] AS [ViewFeedback]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ViewPizza" EntityType="Self.ViewPizza" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ViewPizza].[PizzaName] AS [PizzaName], 
+    [ViewPizza].[PizzaPrice] AS [PizzaPrice]
+    FROM [dbo].[ViewPizza] AS [ViewPizza]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ViewTopping" EntityType="Self.ViewTopping" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ViewTopping].[Description] AS [Description], 
+    [ViewTopping].[Price] AS [Price]
+    FROM [dbo].[ViewTopping] AS [ViewTopping]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Order_" Association="Self.FK_Order_">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="Order1" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Base" Association="Self.FK_Order_Base">
+            <End Role="Base" EntitySet="Base" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Customer" Association="Self.FK_Order_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Drink" Association="Self.FK_Order_Drink">
+            <End Role="CoolDrink" EntitySet="CoolDrink" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_OrderMethod" Association="Self.FK_Order_OrderMethod">
+            <End Role="DeliveryMethod" EntitySet="DeliveryMethod" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Pizza" Association="Self.FK_Order_Pizza">
+            <End Role="Pizza" EntitySet="Pizza" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Topping" Association="Self.FK_Order_Topping">
+            <End Role="Topping" EntitySet="Topping" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PizzaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="AdminId" />
+          </Key>
+          <Property Name="AdminId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Base">
+          <Key>
+            <PropertyRef Name="BaseId" />
+          </Key>
+          <Property Name="BaseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SizeOfPizza" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="percentage" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Order_Base" FromRole="Base" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="CoolDrink">
+          <Key>
+            <PropertyRef Name="DrinkId" />
+          </Key>
+          <Property Name="DrinkId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Flavour" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Add" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Order_Drink" FromRole="CoolDrink" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EmailAddress" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PhysicalAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PrimarySchool" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Repassword" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Order_Customer" FromRole="Customer" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="DeliveryMethod">
+          <Key>
+            <PropertyRef Name="DeliveryId" />
+          </Key>
+          <Property Name="DeliveryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Delivery" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DeliveryAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ContactNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Order_OrderMethod" FromRole="DeliveryMethod" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Feedback">
+          <Key>
+            <PropertyRef Name="FeedbackId" />
+          </Key>
+          <Property Name="FeedbackId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Subject" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CustId" Type="Int32" Nullable="false" />
+          <Property Name="Payment_type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DeliveryId" Type="Int32" Nullable="false" />
+          <Property Name="PizzaId" Type="Int32" />
+          <Property Name="BaseId" Type="Int32" />
+          <Property Name="ToppingId" Type="Int32" />
+          <Property Name="DrinkId" Type="Int32" />
+          <NavigationProperty Name="Base" Relationship="Self.FK_Order_Base" FromRole="Order" ToRole="Base" />
+          <NavigationProperty Name="CoolDrink" Relationship="Self.FK_Order_Drink" FromRole="Order" ToRole="CoolDrink" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Order_Customer" FromRole="Order" ToRole="Customer" />
+          <NavigationProperty Name="DeliveryMethod" Relationship="Self.FK_Order_OrderMethod" FromRole="Order" ToRole="DeliveryMethod" />
+          <NavigationProperty Name="Order1" Relationship="Self.FK_Order_" FromRole="Order" ToRole="Order1" />
+          <NavigationProperty Name="Order2" Relationship="Self.FK_Order_" FromRole="Order1" ToRole="Order" />
+          <NavigationProperty Name="Pizza" Relationship="Self.FK_Order_Pizza" FromRole="Order" ToRole="Pizza" />
+          <NavigationProperty Name="Topping" Relationship="Self.FK_Order_Topping" FromRole="Order" ToRole="Topping" />
+        </EntityType>
+        <EntityType Name="Pizza">
+          <Key>
+            <PropertyRef Name="PizzaId" />
+          </Key>
+          <Property Name="PizzaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PizzaName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PizzaPrice" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Order_Pizza" FromRole="Pizza" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Topping">
+          <Key>
+            <PropertyRef Name="TopId" />
+          </Key>
+          <Property Name="TopId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Price" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Order_Topping" FromRole="Topping" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="DrinkPrice">
+          <Key>
+            <PropertyRef Name="Flavour" />
+            <PropertyRef Name="Add" />
+          </Key>
+          <Property Name="Flavour" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Add" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderHistory">
+          <Key>
+            <PropertyRef Name="Title" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="OrderId" />
+            <PropertyRef Name="OrderDate" />
+            <PropertyRef Name="PizzaName" />
+            <PropertyRef Name="PizzaPrice" />
+            <PropertyRef Name="SizeOfPizza" />
+            <PropertyRef Name="percentage" />
+            <PropertyRef Name="Description" />
+            <PropertyRef Name="Price" />
+            <PropertyRef Name="Flavour" />
+            <PropertyRef Name="Add" />
+            <PropertyRef Name="Delivery" />
+            <PropertyRef Name="Expr1" />
+            <PropertyRef Name="ContactNumber" />
+            <PropertyRef Name="Surname" />
+          </Key>
+          <Property Name="Title" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PizzaName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PizzaPrice" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="SizeOfPizza" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="percentage" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="Flavour" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Add" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="Delivery" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Expr1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DeliveryAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ContactNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Total_Amount" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="Surname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ViewBase">
+          <Key>
+            <PropertyRef Name="SizeOfPizza" />
+            <PropertyRef Name="percentage" />
+          </Key>
+          <Property Name="SizeOfPizza" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="percentage" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ViewCustomer">
+          <Key>
+            <PropertyRef Name="Title" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Surname" />
+            <PropertyRef Name="DateOfBirth" />
+            <PropertyRef Name="EmailAddress" />
+            <PropertyRef Name="PhysicalAddress" />
+            <PropertyRef Name="PrimarySchool" />
+            <PropertyRef Name="Password" />
+            <PropertyRef Name="Repassword" />
+          </Key>
+          <Property Name="Title" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EmailAddress" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PhysicalAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PrimarySchool" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Repassword" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ViewFeedback">
+          <Key>
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Subject" />
+            <PropertyRef Name="Comment" />
+            <PropertyRef Name="EmailAddress" />
+            <PropertyRef Name="PhoneNumber" />
+          </Key>
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Subject" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ViewPizza">
+          <Key>
+            <PropertyRef Name="PizzaName" />
+            <PropertyRef Name="PizzaPrice" />
+          </Key>
+          <Property Name="PizzaName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PizzaPrice" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ViewTopping">
+          <Key>
+            <PropertyRef Name="Description" />
+            <PropertyRef Name="Price" />
+          </Key>
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Order_Base">
+          <End Role="Base" Type="Self.Base" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Base">
+              <PropertyRef Name="BaseId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="BaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Drink">
+          <End Role="CoolDrink" Type="Self.CoolDrink" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoolDrink">
+              <PropertyRef Name="DrinkId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="DrinkId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="CustId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_OrderMethod">
+          <End Role="DeliveryMethod" Type="Self.DeliveryMethod" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeliveryMethod">
+              <PropertyRef Name="DeliveryId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="DeliveryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_">
+          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="Order1" Type="Self.Order" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="Order1">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Pizza">
+          <End Role="Pizza" Type="Self.Pizza" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pizza">
+              <PropertyRef Name="PizzaId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="PizzaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Topping">
+          <End Role="Topping" Type="Self.Topping" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Topping">
+              <PropertyRef Name="TopId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="ToppingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PizzaContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admins" EntityType="Self.Admin" />
+          <EntitySet Name="Bases" EntityType="Self.Base" />
+          <EntitySet Name="CoolDrinks" EntityType="Self.CoolDrink" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="DeliveryMethods" EntityType="Self.DeliveryMethod" />
+          <EntitySet Name="Feedbacks" EntityType="Self.Feedback" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="Pizzas" EntityType="Self.Pizza" />
+          <EntitySet Name="Toppings" EntityType="Self.Topping" />
+          <EntitySet Name="DrinkPrices" EntityType="Self.DrinkPrice" />
+          <EntitySet Name="OrderHistories" EntityType="Self.OrderHistory" />
+          <EntitySet Name="ViewBases" EntityType="Self.ViewBase" />
+          <EntitySet Name="ViewCustomers" EntityType="Self.ViewCustomer" />
+          <EntitySet Name="ViewFeedbacks" EntityType="Self.ViewFeedback" />
+          <EntitySet Name="ViewPizzas" EntityType="Self.ViewPizza" />
+          <EntitySet Name="ViewToppings" EntityType="Self.ViewTopping" />
+          <AssociationSet Name="FK_Order_Base" Association="Self.FK_Order_Base">
+            <End Role="Base" EntitySet="Bases" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Drink" Association="Self.FK_Order_Drink">
+            <End Role="CoolDrink" EntitySet="CoolDrinks" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Customer" Association="Self.FK_Order_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_OrderMethod" Association="Self.FK_Order_OrderMethod">
+            <End Role="DeliveryMethod" EntitySet="DeliveryMethods" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_" Association="Self.FK_Order_">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="Order1" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Pizza" Association="Self.FK_Order_Pizza">
+            <End Role="Pizza" EntitySet="Pizzas" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Topping" Association="Self.FK_Order_Topping">
+            <End Role="Topping" EntitySet="Toppings" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <FunctionImport Name="AdminLogin" ReturnType="Collection(String)">
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CustomerOrderHistory" ReturnType="Collection(PizzaModel.CustomerOrderHistory_Result)">
+            <Parameter Name="EmailAddress" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteCustomer">
+            <Parameter Name="EmailAddress" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteOrderHistory">
+            <Parameter Name="OrderId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetPriceOnSelectedFlavour" ReturnType="Collection(Decimal)">
+            <Parameter Name="Flavour" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetPriceOnSizeSelected" ReturnType="Collection(Decimal)">
+            <Parameter Name="size" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetPriceOnToppingSelected" ReturnType="Collection(Decimal)">
+            <Parameter Name="topping" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="InsertCustomer">
+            <Parameter Name="Title" Mode="In" Type="String" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Surname" Mode="In" Type="String" />
+            <Parameter Name="DateOfBirth" Mode="In" Type="DateTime" />
+            <Parameter Name="EmailAddress" Mode="In" Type="String" />
+            <Parameter Name="PhysicalAddress" Mode="In" Type="String" />
+            <Parameter Name="PrimarySchool" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="Repassword" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Login" ReturnType="Collection(String)">
+            <Parameter Name="EmailAddress" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ResetPassord">
+            <Parameter Name="EmailAddress" Mode="In" Type="String" />
+            <Parameter Name="PrimarySchool" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="Repassword" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SaveDeliveryDetails" ReturnType="Collection(Int32)">
+            <Parameter Name="Delivery" Mode="In" Type="String" />
+            <Parameter Name="Address" Mode="In" Type="String" />
+            <Parameter Name="Number" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SaveOrder">
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+            <Parameter Name="DeliveryMethodId" Mode="In" Type="Int32" />
+            <Parameter Name="BaseId" Mode="In" Type="Int32" />
+            <Parameter Name="DrinkId" Mode="In" Type="Int32" />
+            <Parameter Name="ToppingId" Mode="In" Type="Int32" />
+            <Parameter Name="PizzaId" Mode="In" Type="Int32" />
+            <Parameter Name="Date" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="SelectedPizza" ReturnType="Collection(Decimal)">
+            <Parameter Name="PizzaName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SendFeedback">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Subject" Mode="In" Type="String" />
+            <Parameter Name="Comment" Mode="In" Type="String" />
+            <Parameter Name="EmailAddress" Mode="In" Type="String" />
+            <Parameter Name="PhoneNumber" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateCoolDrink">
+            <Parameter Name="Flavour" Mode="In" Type="String" />
+            <Parameter Name="PizzaPrice" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdatePizzaPrice">
+            <Parameter Name="PizzaName" Mode="In" Type="String" />
+            <Parameter Name="PizzaPrice" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdatePizzaTopping">
+            <Parameter Name="PizzaTopping" Mode="In" Type="String" />
+            <Parameter Name="PizzaPrice" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateSizePrice">
+            <Parameter Name="PizzaSize" Mode="In" Type="String" />
+            <Parameter Name="PizzaPrice" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="CustomerOrderHistory_Result">
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="OrderId" Nullable="false" />
+          <Property Type="DateTime" Name="OrderDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="PizzaName" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="PizzaPrice" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="String" Name="SizeOfPizza" Nullable="false" MaxLength="10" />
+          <Property Type="Decimal" Name="percentage" Nullable="false" Precision="5" Scale="2" />
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="Price" Nullable="false" Precision="5" Scale="2" />
+          <Property Type="String" Name="Flavour" Nullable="false" MaxLength="20" />
+          <Property Type="Decimal" Name="Add" Nullable="false" Precision="5" Scale="2" />
+          <Property Type="String" Name="Delivery" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="DeliveryAddress" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ContactNumber" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="Total_Amount" Nullable="true" Precision="38" Scale="2" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PizzaModelStoreContainer" CdmEntityContainer="PizzaContext">
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="PizzaModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bases">
+            <EntityTypeMapping TypeName="PizzaModel.Base">
+              <MappingFragment StoreEntitySet="Base">
+                <ScalarProperty Name="BaseId" ColumnName="BaseId" />
+                <ScalarProperty Name="SizeOfPizza" ColumnName="SizeOfPizza" />
+                <ScalarProperty Name="percentage" ColumnName="percentage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CoolDrinks">
+            <EntityTypeMapping TypeName="PizzaModel.CoolDrink">
+              <MappingFragment StoreEntitySet="CoolDrink">
+                <ScalarProperty Name="DrinkId" ColumnName="DrinkId" />
+                <ScalarProperty Name="Flavour" ColumnName="Flavour" />
+                <ScalarProperty Name="Add" ColumnName="Add" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="PizzaModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="PhysicalAddress" ColumnName="PhysicalAddress" />
+                <ScalarProperty Name="PrimarySchool" ColumnName="PrimarySchool" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Repassword" ColumnName="Repassword" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DeliveryMethods">
+            <EntityTypeMapping TypeName="PizzaModel.DeliveryMethod">
+              <MappingFragment StoreEntitySet="DeliveryMethod">
+                <ScalarProperty Name="DeliveryId" ColumnName="DeliveryId" />
+                <ScalarProperty Name="Delivery" ColumnName="Delivery" />
+                <ScalarProperty Name="DeliveryAddress" ColumnName="DeliveryAddress" />
+                <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Feedbacks">
+            <EntityTypeMapping TypeName="PizzaModel.Feedback">
+              <MappingFragment StoreEntitySet="Feedback">
+                <ScalarProperty Name="FeedbackId" ColumnName="FeedbackId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="PizzaModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="CustId" ColumnName="CustId" />
+                <ScalarProperty Name="Payment_type" ColumnName="Payment_type" />
+                <ScalarProperty Name="DeliveryId" ColumnName="DeliveryId" />
+                <ScalarProperty Name="PizzaId" ColumnName="PizzaId" />
+                <ScalarProperty Name="BaseId" ColumnName="BaseId" />
+                <ScalarProperty Name="ToppingId" ColumnName="ToppingId" />
+                <ScalarProperty Name="DrinkId" ColumnName="DrinkId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pizzas">
+            <EntityTypeMapping TypeName="PizzaModel.Pizza">
+              <MappingFragment StoreEntitySet="Pizza">
+                <ScalarProperty Name="PizzaId" ColumnName="PizzaId" />
+                <ScalarProperty Name="PizzaName" ColumnName="PizzaName" />
+                <ScalarProperty Name="PizzaPrice" ColumnName="PizzaPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Toppings">
+            <EntityTypeMapping TypeName="PizzaModel.Topping">
+              <MappingFragment StoreEntitySet="Topping">
+                <ScalarProperty Name="TopId" ColumnName="TopId" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DrinkPrices">
+            <EntityTypeMapping TypeName="PizzaModel.DrinkPrice">
+              <MappingFragment StoreEntitySet="DrinkPrice">
+                <ScalarProperty Name="Flavour" ColumnName="Flavour" />
+                <ScalarProperty Name="Add" ColumnName="Add" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderHistories">
+            <EntityTypeMapping TypeName="PizzaModel.OrderHistory">
+              <MappingFragment StoreEntitySet="OrderHistory">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="PizzaName" ColumnName="PizzaName" />
+                <ScalarProperty Name="PizzaPrice" ColumnName="PizzaPrice" />
+                <ScalarProperty Name="SizeOfPizza" ColumnName="SizeOfPizza" />
+                <ScalarProperty Name="percentage" ColumnName="percentage" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Flavour" ColumnName="Flavour" />
+                <ScalarProperty Name="Add" ColumnName="Add" />
+                <ScalarProperty Name="Delivery" ColumnName="Delivery" />
+                <ScalarProperty Name="Expr1" ColumnName="Expr1" />
+                <ScalarProperty Name="DeliveryAddress" ColumnName="DeliveryAddress" />
+                <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+                <ScalarProperty Name="Total_Amount" ColumnName="Total Amount" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ViewBases">
+            <EntityTypeMapping TypeName="PizzaModel.ViewBase">
+              <MappingFragment StoreEntitySet="ViewBase">
+                <ScalarProperty Name="SizeOfPizza" ColumnName="SizeOfPizza" />
+                <ScalarProperty Name="percentage" ColumnName="percentage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ViewCustomers">
+            <EntityTypeMapping TypeName="PizzaModel.ViewCustomer">
+              <MappingFragment StoreEntitySet="ViewCustomers">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="PhysicalAddress" ColumnName="PhysicalAddress" />
+                <ScalarProperty Name="PrimarySchool" ColumnName="PrimarySchool" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Repassword" ColumnName="Repassword" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ViewFeedbacks">
+            <EntityTypeMapping TypeName="PizzaModel.ViewFeedback">
+              <MappingFragment StoreEntitySet="ViewFeedback">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ViewPizzas">
+            <EntityTypeMapping TypeName="PizzaModel.ViewPizza">
+              <MappingFragment StoreEntitySet="ViewPizza">
+                <ScalarProperty Name="PizzaName" ColumnName="PizzaName" />
+                <ScalarProperty Name="PizzaPrice" ColumnName="PizzaPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ViewToppings">
+            <EntityTypeMapping TypeName="PizzaModel.ViewTopping">
+              <MappingFragment StoreEntitySet="ViewTopping">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="AdminLogin" FunctionName="PizzaModel.Store.AdminLogin" />
+          <FunctionImportMapping FunctionImportName="CustomerOrderHistory" FunctionName="PizzaModel.Store.CustomerOrderHistory">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PizzaModel.CustomerOrderHistory_Result">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="PizzaName" ColumnName="PizzaName" />
+                <ScalarProperty Name="PizzaPrice" ColumnName="PizzaPrice" />
+                <ScalarProperty Name="SizeOfPizza" ColumnName="SizeOfPizza" />
+                <ScalarProperty Name="percentage" ColumnName="percentage" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Flavour" ColumnName="Flavour" />
+                <ScalarProperty Name="Add" ColumnName="Add" />
+                <ScalarProperty Name="Delivery" ColumnName="Delivery" />
+                <ScalarProperty Name="DeliveryAddress" ColumnName="DeliveryAddress" />
+                <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+                <ScalarProperty Name="Total_Amount" ColumnName="Total Amount" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DeleteCustomer" FunctionName="PizzaModel.Store.DeleteCustomer" />
+          <FunctionImportMapping FunctionImportName="DeleteOrderHistory" FunctionName="PizzaModel.Store.DeleteOrderHistory" />
+          <FunctionImportMapping FunctionImportName="GetPriceOnSelectedFlavour" FunctionName="PizzaModel.Store.GetPriceOnSelectedFlavour" />
+          <FunctionImportMapping FunctionImportName="GetPriceOnSizeSelected" FunctionName="PizzaModel.Store.GetPriceOnSizeSelected" />
+          <FunctionImportMapping FunctionImportName="GetPriceOnToppingSelected" FunctionName="PizzaModel.Store.GetPriceOnToppingSelected" />
+          <FunctionImportMapping FunctionImportName="InsertCustomer" FunctionName="PizzaModel.Store.InsertCustomer" />
+          <FunctionImportMapping FunctionImportName="Login" FunctionName="PizzaModel.Store.Login" />
+          <FunctionImportMapping FunctionImportName="ResetPassord" FunctionName="PizzaModel.Store.ResetPassord" />
+          <FunctionImportMapping FunctionImportName="SaveDeliveryDetails" FunctionName="PizzaModel.Store.SaveDeliveryDetails" />
+          <FunctionImportMapping FunctionImportName="SaveOrder" FunctionName="PizzaModel.Store.SaveOrder" />
+          <FunctionImportMapping FunctionImportName="SelectedPizza" FunctionName="PizzaModel.Store.SelectedPizza" />
+          <FunctionImportMapping FunctionImportName="SendFeedback" FunctionName="PizzaModel.Store.SendFeedback" />
+          <FunctionImportMapping FunctionImportName="UpdateCoolDrink" FunctionName="PizzaModel.Store.UpdateCoolDrink" />
+          <FunctionImportMapping FunctionImportName="UpdatePizzaPrice" FunctionName="PizzaModel.Store.UpdatePizzaPrice" />
+          <FunctionImportMapping FunctionImportName="UpdatePizzaTopping" FunctionName="PizzaModel.Store.UpdatePizzaTopping" />
+          <FunctionImportMapping FunctionImportName="UpdateSizePrice" FunctionName="PizzaModel.Store.UpdateSizePrice" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

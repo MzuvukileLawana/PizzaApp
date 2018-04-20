@@ -1,0 +1,232 @@
+﻿@{
+    ViewBag.Title = "Contact";
+}
+
+<div class="startYourOrder" style="height:30px; background:gray;  margin: 10px;">
+    <p></p>
+</div>
+
+<h1 style="color:#ffffff;"><b>CUSTOMER CARE</b></h1>
+<hr />
+<div class="rowSupport">
+
+    <div class="col-md-4" style="background: #040000;border: 10px groove #f8d514; ">
+        <div class="contactNumber1" style="color:#ffffff; text-align:center;">
+            <h3 style="color:lightgray; text-align:center;">Online Order</h3>
+            <h2 style="color:lightgray; text-align:center;">021 526 0000</h2>
+        </div>
+
+
+    </div>
+    <div class="col-md-4" style="background: #040000; border: 10px groove #f8d514;">
+        <div class="contactNumber2" >
+            <h3 style="color:lightgray; text-align:center;">Customer Service & Claims</h3>
+            <h2 style="color:lightgray; text-align:center;">021 526 0000</h2>
+        </div>
+
+
+    </div>
+    <div class="col-md-4" style="background: #040000;border: 10px groove #f8d514;">
+        <div class="contactNumber4">
+            <h3 style="color:lightgray; text-align:center;">Queries</h3>
+            <h2 style="color:lightgray; text-align:center;">078 623 3333</h2>
+        </div>
+
+
+    </div>
+</div>
+<div class="col-md-4">
+    <div class="contactNumber" style="color:#ffffff; font-weight:bold; font-size:17px;">
+        <h3 style="color:#ffffff;"><b>Online Ordering:</b></h3>
+        <div class="col-md-6">
+
+            <p>Mon to Thu:</p>
+
+            <p>Fri:</p>
+
+            <p>Sat:</p>
+
+            <p>Sun:</p>
+
+            <p>Public Holidays</p>
+
+        </div>
+        <div class="col-md-6" style="color:#ffffff; font-weight:bold;font-size:17px;">
+
+            <p>08h00 - 23h00</p>
+
+            <p>08h00 - 23h59</p>
+
+            <p>08h00 - 02h00</p>
+
+            <p>08h00 - 23h00</p>
+
+            <p>08h00 - 02h00</p>
+        </div>
+
+    </div>
+</div>
+
+<div class="col-md-4">
+    <h3 style="color:#ffffff;"><b>Support:</b></h3>
+    <div class="contactNumber"style="color:#ffffff; font-weight:bold;font-size:17px;">
+        <div class="col-md-6">
+
+            <p>Mon to Fri:</p>
+
+            <p>Sat:</p>
+
+            <p>Sun:</p>
+
+            <p>Public Holidays</p>
+
+        </div>
+        <div class="col-md-6"style="color:#ffffff;font-weight:bold;font-size:17px;">
+
+            <p>08h00 - 18h00</p>
+
+            <p>08h00 - 13h00</p>
+
+            <p>Closed</p>
+
+            <p>08h00 - 13h00</p>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="col-md-4">
+    <h3 style="color:#ffffff;"><b>Claims:</b></h3>
+    <div class="contactNumber"style="color:#ffffff;font-weight:bold;font-size:17px;">
+        <div class="col-md-6">
+
+            <p>Mon to Fri:</p>
+
+            <p>Sat:</p>
+
+            <p>Sun:</p>
+
+            <p>Public Holidays</p>
+
+        </div>
+        <div class="col-md-6"style="color:#ffffff;font-weight:bold;font-size:17px;">
+
+            <p>08h00 - 17h00</p>
+
+            <p>08h00 - 13h00</p>
+
+            <p>Closed</p>
+
+            <p>08h00 - 13h00</p>
+        </div>
+
+    </div>
+</div>
+
+
+
+<hr />
+<div class="col-md-12">
+    <h3 style="color:#ffffff;"><b>Other contact details</b></h3>
+    <div class="contactNumber"style="color:#ffffff; font-size:17px;">
+        <div class="col-md-6">
+
+            <p><h4 style="color:#ffffff;font-size:15px;"><b>Email us:</b></h4> mzu.lawana@mzucardealer.com</p>
+
+        </div>
+        <div class="col-md-6"style="color:#ffffff; font-size:15px;">
+
+            <p><h4 style="color:#ffffff;font-size:15px;"><b>Find us:</b></h4> 20 Heron street, Sunbird Park, Kuils River, 7750 </p>
+        </div>
+
+    </div>
+</div>
+<hr />
+<div class="col-md-12">
+    <h3 style="color:#ffffff;"><b>Have your say</b></h3>
+    <div class="contactNumber">
+        <div class="col-md-4" style="font-weight: bold; color:#ffffff; font-size:17px;">
+
+            <p>We're eager to hear what you have to say, whether it's a compliment, a suggestion, an enquiry or a complaint.</p>
+            <p>Compliments:<br /><span class="detailsContact">021 0000 598</span></p>
+            <p>Complaints:<br /><span class="detailsContact">disputeresolution@mzuspizza.co.za</span><br /><span class="detailsContact">021 0000 598</span></p>
+            <p>Compliance:<br /><span class="detailsContact">compliance@mzuspizza.co.za</span></p>
+            <p>Fraud & Ethics:<br /><span class="detailsContact">ethics@mzuspizza.co.za</span></p>
+
+
+        </div>
+        <div class="col-md-8" style="background:lightgray;">
+
+
+            <div class="modal-header">
+                <h3 class="modal-title"><b>You can also share your feedback with us by filling in this form:</b></h3>
+
+            </div>
+
+
+            <div class="rowFeedback">
+                @using (Html.BeginForm())
+                {
+                    <div class="col-md-6" style="margin-top: 5px;">
+
+                       
+                        <div class="form-group">
+                            <label for="name"><b>Name:<span class="required">*</span></b></label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" required="required">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject"><b>Subject:<span class="required">*</span></b></label>
+                            <select class="form-control" id="subject" name="subject" required="required">
+                                <option></option>
+                                <option>General</option>
+                                <option>Online Ordering</option>
+                                <option>Complaints</option>
+                                <option>Compliments</option>
+                                <option>Advertising</option>
+                              
+
+
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="comment"><b>Comment:<span class="required">*</span></b></label>
+                            <textarea class="form-control" id="comment" name="comment" rows="4" placeholder="Write something..." required="required"></textarea>
+                        </div>
+                        
+                    </div>
+                    <div class="col-md-6" style="margin-top: 5px;">
+
+
+                        <div class="form-group">
+                            <label for="email"><b>Email address:<span class="required">*</span></b></label>
+                            <input type="email" class="form-control" id="emailAddress" name="emailAddress" aria-describedby="emailHelp" placeholder="Enter email" required="required">
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div>
+                        <div class="form-group">
+                        <label for="phoneNumber"><b>Phone Number:<span class="required">*</span></b></label>
+                        <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" aria-describedby="emailHelp" placeholder="Enter phone number" required="required">
+                        <small id="emailHelp" class="form-text text-muted"><br />We'll never share your phone number with anyone else.</small>
+                    </div>
+
+
+                                <p><b><span class="NB">NB</span>: all field are required</b></p>
+                                <button type="submit" class="btn btn-default" style="padding-left: 85px; padding-right:85px; height:52px; padding-left:92px; padding-right:92px;" >Send Feedback</button>
+                        @if (ViewBag.Sent == true)
+                        {
+                            <p class="successful" style="color:green; font-weight:bold;"><b>@ViewBag.Successful</b></p>
+                        }
+                        </div>
+                 
+                }
+            </div>
+
+      
+    </div>
+
+</div>
+    </div>
+
+
+

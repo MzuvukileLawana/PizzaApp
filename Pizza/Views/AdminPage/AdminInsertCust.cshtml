@@ -1,0 +1,75 @@
+﻿
+@{
+    ViewBag.Title = "AdminInsertCust";
+    Layout = "~/Views/Shared/AdminNavBar.cshtml";
+}
+
+<div class="startYourOrder" style="height:50px; background:#040000; color: #f8d514;  margin: 10px; font-size:35px;font-weight:bold; text-align:center; ">
+    <p>Insert Customer</p>
+</div>
+<div class="col-md-12">
+    <form class="modal-content animate" action="/AdminPage/AdminInsertCust" method="post">
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="title"><b>Title:<span class="required">*</span></b></label>
+                <select class="form-control" id="title" name="title" required="required">
+                    <option></option>
+                    <option>Mr</option>
+                    <option>Mrs</option>
+                    <option>Miss</option>
+                    <option>Ms</option>
+                    <option>Sir</option>
+                    <option>Dr</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="name"><b>Name:<span class="required">*</span></b></label><br />
+                <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp" placeholder="Enter name" required="required">
+                <small id="emailHelp" class="form-text text-muted"></small>
+            </div>
+            <div class="form-group">
+                <label for="surname"><b>Surname:<span class="required">*</span></b></label><br />
+                <input type="text" class="form-control" id="surname" name="surname" placeholder="Enter surname" required="required">
+            </div>
+            <div class="form-group">
+                <label for="dateOfBirth"><b>DateOfBirth:<span class="required">*</span></b></label>
+                <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" placeholder="Enter date of birth" required="required">
+            </div>
+            <div class="form-group">
+                <label for="email"><b>Email address:<span class="required">*</span></b></label>
+                <input type="email" class="form-control" id="emailAddress" name="emailAddress" aria-describedby="emailHelp" placeholder="Enter email" required="required">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+
+            <div class="form-group">
+                <label for="physicalAddress"><b>Physical Address:<span class="required">*</span></b></label><br />
+                <input type="text" class="form-control" id="physicalAddress" name="physicalAddress" aria-describedby="emailHelp" placeholder="Enter physical address" required="required">
+                <small id="emailHelp" class="form-text text-muted"></small>
+            </div>
+            <div class="form-group">
+                <label for="school"><b>Primary School:<span class="required">*</span></b></label><br />
+                <input type="text" class="form-control" id="primarySchool" name="primarySchool" aria-describedby="emailHelp" placeholder="Enter primary school" required="required">
+                <small id="emailHelp" class="form-text text-muted"></small>
+            </div>
+
+            <div class="form-group">
+                <label for="password"><b>Password:<span class="required">*</span></b></label><br />
+                <input type="password" class="form-control" id="password" name="password" aria-describedby="emailHelp" placeholder="Enter password" required="required">
+                <small id="emailHelp" class="form-text text-muted"></small>
+            </div>
+            <div class="form-group">
+                <label for="repassword"><b>Confirm Password:<span class="required">*</span></b></label><br />
+                <input type="password" class="form-control" id="repassword" name="repassword" aria-describedby="emailHelp" placeholder="Enter password" required="required">
+                <small id="emailHelp" class="form-text text-muted"></small>
+            </div>
+
+        </div>
+        <p><b><span class="NB">NB</span>: all field are required</b></p>
+        <button type="submit" class="btn btn-default " style="background: #f8d514">Add</button>
+    </form>
+</div>
+

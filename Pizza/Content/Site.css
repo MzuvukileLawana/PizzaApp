@@ -1,0 +1,122 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    background-image: url('../image/wood-slanted.jpg');
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 8px;
+    padding-right: 8px;
+   
+}
+.emailSpan{
+    font-size:20px;
+}
+                               
+.NB{
+    color:red;
+}
+.detailsContact{
+    color:#f8d514;
+    text-decoration:underline;
+}
+.required{
+    color:red;
+}
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+.navbar{
+    height:90px; 
+    background: #040000; 
+    border-bottom: 5px solid #f8d514;
+    padding-top:20px;
+    font-size: 20px;
+}
+.member{
+    color: #f8d514;
+    font-size:25px;
+    font-weight:bold;
+}
+.logoName{
+    color:#82700e;
+}
+.btn{
+    background: #f8d514;
+    color: #040000;
+
+}
+.btn-default{
+    border-color: #82700e;
+}
+.modal-footer{
+    background: #040000; 
+    position:sticky;
+    position:absolute;
+    padding-bottom:0;
+    color:lightgray;
+    height:200px;
+    text-align:center;
+    left:0;
+    right:0;
+    border-top:1px dashed #f8d514;
+}
+/*------------------------*/
+
+
+
+#btnGroupDrop1{
+    background:#040000;
+  
+}
+/*-----social media-----------*/
+.fa {
+  padding: 20px;
+  font-size: 200px;
+  width: 100px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+}
+
+.fa:hover {
+    opacity: 0.7;
+}
+
+.fa-facebook {
+  background: #f8d514;
+  color: #040000;
+  border-radius: 60%;
+  
+}
+
+.fa-twitter {
+  background: #f8d514;
+  color: #040000;
+  border-radius: 60%;
+}
+
+.fa-linkedin {
+  background: #f8d514;
+  color: #040000;
+  border-radius: 60%;
+}
+
+.fa-youtube {
+  background: #f8d514;
+  color: #040000;
+  border-radius: 60%;
+}
+
+

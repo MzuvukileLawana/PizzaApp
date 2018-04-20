@@ -1,0 +1,330 @@
+﻿
+
+<!DOCTYPE html>
+
+<html>
+
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+ 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    @Scripts.Render("~/bundles/modernizr")
+
+    <link href="~/Content/login.css" rel="stylesheet" />
+
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top" >
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                
+                <p style="font-size:5px; "><h3><b><span class="logoName">Mzu's</span>Pizza.com</b></h3></p>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav" style="color:lightgray">
+                    
+                   
+                    <li style="font-weight:bold;">@Html.ActionLink("HOME", "Index", "Home")</li>
+                    <li style="font-weight:bold;">@Html.ActionLink("MENU", "Menu", "Home")</li>
+                    <li style="font-weight:bold;">@Html.ActionLink("CONTACT", "Contact", "Home")</li>
+                </ul>
+               
+            
+                    
+                   
+                    
+                    @if (ViewBag.Message == true)
+                    {
+                        <ul class="nav navbar-nav" style="color:lightgray">
+
+
+                            <li style="font-weight:bold;">@Html.ActionLink("Order History", "CustOrderHistory", "Home")</li>
+                         
+                        </ul>
+                    <div class="loginBtn" style="float:right;">
+                        <a class="helloMessage" style="color:lightgray; font-weight:bold; font-size: 15px; padding-top: 15px;">@ViewBag.Message1</a>
+                        <a class="btn btn-default" @Html.ActionLink("Log Out", "LogOut", "Authentication")></a>
+                    </div>
+                    }
+                    else
+                    {
+                        <div class="loginBtn" style="float:right;">
+
+                            @*<a class="btn btn-default" @Html.ActionLink("Login", "CustomerLogin", "Authentication")</a>*@
+                            <a class="btn btn-default " onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</a>
+
+                            <div id="id01" class="modal">
+
+                                <form class="modal-content animate" action="/Authentication/CustomerLogin" method="post">
+                                    <div class="imgcontainer">
+                                        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                                        <img src="~/image/Login.png" alt="login" class="login" style="text-align:center; width:10%; height:90px; ">
+                                    </div>
+                                    <hr />
+                                    <div class="container">
+                                        <div class="col-md-6">
+                                            <p id="member"><span class="member">Already A Member?</span> Welcome Back!</p>
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1"><b>Email address:<span class="required">*</span></b></label>
+                                                <input type="email" class="form-control" id="emailAddress" name="emailAddress" aria-describedby="emailHelp" placeholder="Enter email" required="required">
+                                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputPassword1"><b>Password:<span class="required">*</span></b></label><br />
+                                                <input type="password" name="password" class="form-control" id="password" placeholder="Password " required="required"><br />
+                                                <small id="emailHelp" class="form-text text-muted">Your password is encrypted.</small>
+                                            </div>
+                                            <p><b><span class="NB">NB</span>: all field are required</b></p>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            
+                                            <p></p>
+                                            <a class="btn btn-default " onclick="document.getElementById('id03').style.display='block'" style="width:auto;">Forgot Password</a>
+                                            <p><b><span class="underline"><a class="btn btn-default " onclick="document.getElementById('id02').style.display='block'" style="width:auto;">Sign Up</a></span> if you do not have an account.</b></p>
+                                            <p><b>- For any other issues, please call our call center</b></p>
+                                            <div>
+                                                <p id="member"><b><span class="member">Are You Admin?</span> Login As Admin</b></p>
+                                                <p></p>
+                                                <p><b><span class="underline"><a class="btn btn-default " onclick="document.getElementById('id04').style.display='block'" style="width:auto;">Admin</a></span> if you do not have an account.</b></p>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-default" style="height:52px; margin-left:20px; margin-right:200px;" onclick="$('#id01').model({ 'backdrop': 'static' });">Login</button>
+                                    </div>
+
+                                </form>
+                            </div>
+                            @*-----------------------------------------------------------------------------------------------------------------------------------*@
+                            @*<p<a class="btn btn-default" @Html.ActionLink("Sign Up", "SignUp", "Authentication")</a>*@
+                            <a class="btn btn-default " onclick="document.getElementById('id02').style.display='block'" style="width:auto;">Sign Up</a>
+                            <div id="id02" class="modal">
+
+                                <form class="modal-content animate" action="Authentication/SignUp" method="post">
+                                    @*@using (Html.BeginForm("SubmitForm", "Home", FormMethod.Post))*@
+                                    <div class="imgcontainer">
+                                        <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
+                                        <img src="~/image/SignUp.png" alt="login" class="login" style="text-align:center; width:10%; height:90px; ">
+                                    </div>
+                                    <hr />
+                                    <div class="container">
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="title"><b>Title:<span class="required">*</span></b></label>
+                                                <select class="form-control" id="title" name="title" required="required">
+                                                    <option></option>
+                                                    <option>Mr</option>
+                                                    <option>Mrs</option>
+                                                    <option>Miss</option>
+                                                    <option>Ms</option>
+                                                    <option>Sir</option>
+                                                    <option>Dr</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="name"><b>Name:<span class="required">*</span></b></label><br />
+                                                <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp" placeholder="Enter name" required="required">
+                                                <small id="emailHelp" class="form-text text-muted"></small>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="surname"><b>Surname:<span class="required">*</span></b></label><br />
+                                                <input type="text" class="form-control" id="surname" name="surname" placeholder="Enter surname" required="required">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="dateOfBirth"><b>DateOfBirth:<span class="required">*</span></b></label>
+                                                <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" placeholder="Enter date of birth" required="required">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="email"><b>Email address:<span class="required">*</span></b></label>
+                                                <input type="email" class="form-control" id="emailAddress" name="emailAddress" aria-describedby="emailHelp" placeholder="Enter email" required="required">
+                                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+
+                                            <div class="form-group">
+                                                <label for="physicalAddress"><b>Physical Address:<span class="required">*</span></b></label><br />
+                                                <input type="text" class="form-control" id="physicalAddress" name="physicalAddress" aria-describedby="emailHelp" placeholder="Enter physical address" required="required">
+                                                <small id="emailHelp" class="form-text text-muted"></small>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="school"><b>Primary School:<span class="required">*</span></b></label><br />
+                                                <input type="text" class="form-control" id="primarySchool" name="primarySchool" aria-describedby="emailHelp" placeholder="Enter primary school" required="required">
+                                                <small id="emailHelp" class="form-text text-muted"></small>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="password"><b>Password:<span class="required">*</span></b></label><br />
+                                                <input type="password" class="form-control" id="password" name="password" aria-describedby="emailHelp" placeholder="Enter password" required="required">
+                                                <small id="emailHelp" class="form-text text-muted"></small>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="repassword"><b>Confirm Password:<span class="required">*</span></b></label><br />
+                                                <input type="password" class="form-control" id="repassword" name="repassword" aria-describedby="emailHelp" placeholder="Enter password" required="required">
+                                                <small id="emailHelp" class="form-text text-muted"></small>
+                                            </div>
+                                        </div>
+                                        <p><b><span class="NB">NB</span>: all field are required</b></p>
+                                        <button type="submit" class="btn btn-default" style="height:52px; padding-left:118px; padding-right:118px;">Sign Up</button>
+
+                                    </div>
+                                </form>
+                            </div>
+                            @*-----------------------------------------------------------------------------------------------------------------------------------*@
+                       
+                            <div id="id03" class="modal">
+
+                                <form class="modal-content animate" action="Authentication/ResetPassword" method="post">
+                                    <div class="imgcontainer">
+                                        <span onclick="document.getElementById('id03').style.display='none'" class="close" title="Close Modal">&times;</span>
+                                        <p id="member"><b><span class="member">Set Password</span></b></p>
+                                    </div>
+                                    <hr />
+                                    <div class="container">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1"><b>Email address:<span class="required">*</span></b></label>
+                                                <input type="email" class="form-control" id="emailAddress" name="emailAddress" aria-describedby="emailHelp" placeholder="Enter email" required="required">
+                                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputPassword1"><b>Primary School:<span class="required">*</span></b></label><br />
+                                                <input type="text" name="primarySchool" class="form-control" id="primarySchool" placeholder="Enter primary school" required="required"><br />
+                                                <small id="emailHelp" class="form-text text-muted"></small>
+                                            </div>
+                                            <p><b><span class="NB">NB</span>: all field are required</b></p>
+
+                                        </div>
+                                        <div class="col-md-6"> 
+                                            <div class="form-group">
+                                                <label for="password"><b>Password:<span class="required">*</span></b></label><br />
+                                                <input type="password" class="form-control" id="password" name="password" aria-describedby="emailHelp" placeholder="Enter password" required="required">
+                                                <small id="emailHelp" class="form-text text-muted"><br />Your password is encrypted.</small>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="repassword"><b>Confirm Password:<span class="required">*</span></b></label><br />
+                                                <input type="password" class="form-control" id="repassword" name="repassword" aria-describedby="emailHelp" placeholder="Enter password" required="required">
+                                                <small id="emailHelp" class="form-text text-muted"><br />Your password is encrypted.</small>
+                                            </div>
+                                            <p></p>
+                                            
+                                        </div>
+                                        <button type="submit" class="btn btn-default" style="height:52px; margin-left:20px; margin-right:200px;">Reset</button>
+                                    </div>
+
+                                </form>
+                            </div>
+
+                            @*-----------------------------------------------------------------------------------------------------------------------------------*@
+
+                            <div id="id04" class="modal">
+
+                                <form class="modal-content animate" action="/Authentication/AdminLogin" method="post">
+                                    <div class="imgcontainer">
+                                        <span onclick="document.getElementById('id04').style.display='none'" class="close" title="Close Modal">&times;</span>
+                                        <img src="~/image/Login.png" alt="login" class="login" style="text-align:center; width:10%; height:90px; ">
+                                    </div>
+                                    <hr />
+                                    <div class="container">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <p id="member"><b><span class="member">Are You Admin?</span> Use your credentials?</b></p>
+                                                <label for="exampleInputEmail1"><b>Email address:<span class="required">*</span></b></label>
+                                                <input type="email" class="form-control" id="userName" name="userName" aria-describedby="emailHelp" placeholder="Enter email" required="required">
+                                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputPassword1"><b>Password:<span class="required">*</span></b></label><br />
+                                                <input type="password" name="password" class="form-control" id="password" placeholder="Password " required="required"><br />
+                                                <small id="emailHelp" class="form-text text-muted">Your password is encrypted.</small>
+                                            </div>
+                                            <p><b><span class="NB">NB</span>: all field are required</b></p>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            
+                                           
+                                        </div>
+                                        <button type="submit" class="btn btn-default" style="height:52px; margin-left:20px; margin-right:200px;">Login</button>
+                                    </div>
+
+                                </form>
+                            </div>
+
+                            @*-----------------------------------------------------------------------------------------------------------------------------------*@
+                        </div>
+                    }
+
+
+                    @*-----------------------------------------------------------------------------------------------------------------------------------*@
+
+                    @* }
+                                   else
+                        {
+                            <div class="loginBtn" style="float:right;">
+                                <a class="helloMessage" style="color:lightgray; font-weight:bold; font-size: 15px; padding-top: 15px;">@ViewBag.WelcomeMessage</a>
+                                <a class="btn btn-default" @Html.ActionLink("Log Out", "LogOut", "Authentication") />
+                            </div>
+                        }*@
+
+
+                </div>
+        </div>
+    </div>
+    
+    <div class="container body-content" >
+        @RenderBody()
+        
+        
+    </div>
+    <div class="modal-footer" style="margin-top:40px;">
+        <footer>
+            <small><p>&copy; @DateTime.Now.Year - Mzu Lawana</p></small>
+         
+
+            <p id="datetime"></p>
+            <a href="https://www.facebook.com/mzuvukile.lawana" class="fa fa-facebook"></a>
+            <a href="https://www.linkedin.com/in/mzuvukile-lawana-ba0952117/" class="fa fa-linkedin"></a>
+            <a href="https://twitter.com/search?q=%23login&lang=en" class="fa fa-twitter"></a>
+            <a href="https://www.youtube.com/" class="fa fa-youtube"></a>
+
+            
+        </footer>
+
+    </div>
+    <script>
+         document.getElementById("datetime").innerHTML = Date();
+    </script>
+    <script>
+// Get the modal
+        var modal = document.getElementById('id01');
+        var modal = document.getElementById('id02');
+        var modal = document.getElementById('id03');
+        var modal = document.getElementById('id04');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+    </script>
+   
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

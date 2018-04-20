@@ -1,0 +1,287 @@
+﻿@model IEnumerable<Pizza.Models.Customer>
+@{
+    ViewBag.Title = "About";
+    
+}
+
+<h3>@ViewBag.Message</h3>
+<div class="startYourOrder" style="height:30px; background:gray;  padding-bottom: 2px;">
+    <p></p>
+</div>
+<div class="row" style="padding-top:20px; padding-bottom:20px; ">
+    <div class="col-md-2" style="height:150px; border:#040000; ">
+        <img class="showCase" src="~/image/chickenPizza.jpg" width="100%" height="80%" />
+        <p><a class="btn btn-default" style="width:100%; background:#040000; color:#f8d514; font-size:15px;" >Chicken</a></p>
+    </div>
+
+
+    <div class="col-md-2" style="height:150px;border:#040000;">
+        <img class="showCase" src="~/image/barbecue.jpg" width="100%" height="80%" />
+        <p><a class="btn btn-default" style="width:100%; background:#040000; color:#f8d514; font-size:15px;" >BBQ Chicken</a></p>
+    </div>
+
+    <div class="col-md-2" style="height:150px;border:#040000; ">
+        <img class="showCase" src="~/image/maxican.jpg" width="100%" height="80%" />
+        <p><a class="btn btn-default" style="width:100%; background:#040000; color:#f8d514; font-size:15px;" >Maxican Fiasta</a></p>
+    </div>
+
+    <div class="col-md-2" style="height:150px;border:#040000;">
+        <img class="showCase" src="~/image/somethingMeaty.jpg" width="100%" height="80%" />
+        <p><a class="btn btn-default" style="width:100%; background:#040000; color:#f8d514; font-size:15px;">Something Meaty</a></p>
+    </div>
+    <div class="col-md-2" style="height:150px;border:#040000; ">
+        <img class="showCase" src="~/image/promotion1.jpg" width="100%" height="80%" />
+        <p><a class="btn btn-default" style="width:100%; background:#040000; color:#f8d514; font-size:15px;" >Vegetarian</a></p>
+    </div>
+    <div class="col-md-2" style="height:150px; border:#040000; ">
+
+        <img class="showCase" src="~/image/SPECIALITY.jpg" width="100%" height="80%" />
+        <p><a class="btn btn-default" style="width:100%;  background:#040000; color:#f8d514; font-size:15px;" >Speciality </a></p>
+
+        @*<p>@ViewBag.SuccessFul</p>*@
+    </div>
+</div>
+
+<div class="OrderBelow" style="font-size:40px; text-align:center; color:#f8d514; font-weight:bold; background:#040000">
+    <p>Place An Order Below</p>
+</div >
+
+
+    <form class="" action="SubmitOrder" method="post" style="background:lightgray;">
+
+        <div class="form-group" style="padding-top:20px;font-size:20px; padding-left:13px;">
+            <label for="subject"><b>Select Pizza:</b></label>
+            <select class="form-control" id="pizzaName" name="pizzaName" required="required" style="width:1000px;">
+                <option>Select from here</option>
+                <option>Chicken & Mushroom Pizza</option>
+                <option>BBQ Chicken Pizza</option>
+                <option>Maxican Fiasta Pizza</option>
+                <option>Something Meaty Pizza</option>
+                <option>Vegetarian Pzza</option>
+                <option>Speciality Pizza</option>
+            </select>
+        </div>
+
+        <div class="class=" col-md-12" style="padding-top:20px; padding-bottom:20px; ">
+
+            <div class="col-md-4" style="height:250px; border:#040000; margin-bottom:30px ">
+                <img class="showCase" src="~/image/promotion1.jpg" width="100%" height="100%" />
+
+                <p><a class="btn btn-default" id="displayPrice" name="displayPrice" style="width:100%; background:#040000; color:#f8d514; font-size:20px;"><span>R</span>@ViewBag.Price</a></p>
+            </div>
+
+
+
+            <div class="col-md-4" style="height:250px;border:#040000; margin-bottom:30px">
+                <div class="form-group" style="padding-top:20px;">
+                    <label for="subject"><b>Select Size:</b></label>
+                    <select class="form-control" id="size" name="size" required="required" style="width:1000px;">
+                        <option>Small</option>
+                        <option>Medium</option>
+                        <option>Large</option>
+                    </select>
+                </div>
+                <div class="form-group" style="padding-top:20px;">
+                    <label for="subject"><b>Select Topping:</b></label>
+                    <select class="form-control" id="topping" name="topping" required="required" style="width:1000px;">
+                        <option>None</option>
+                        <option>ham</option>
+                        <option>pineapple</option>
+                        <option>bacon</option>
+                        <option>mushroom</option>
+
+                    </select>
+                </div>
+                <div class="form-group" style="padding-top:20px;">
+                    <label for="subject"><b>Cool Drink:</b></label>
+                    <select class="form-control" id="drink" name="drink" required="required" style="width:1000px;">
+                        <option>None</option>
+                        <option>Coca</option>
+                        <option>Lemon swist</option>
+                        <option>Pine</option>
+                        <option>Stoney Ginger-beer</option>
+                    </select>
+                </div>
+
+            </div>
+            <div class="col-md-4" style="height:250px;border:#040000; padding-bottom:30px">
+                <div class="form-group" style="padding-top:20px;">
+                    <label for="subject"><b>Delivery/Collection:</b></label>
+                    <select class="form-control" id="delivery" name="delivery" required="required" style="width:1000px;">
+                        <option>Delivery</option>
+                        <option>Collection</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="comment"><b>Delivery Address:</b></label>
+                    <textarea class="form-control" id="address" name="address" rows="3" placeholder="Write something..." required="required"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="email"><b>Contact Number:</b></label>
+                    <input type="number" class="form-control" id="number" name="number" aria-describedby="emailHelp" placeholder="Enter email" required="required">
+                    <small id="emailHelp" class="form-text text-muted"></small>
+                </div>
+
+
+            </div>
+
+            
+        </div>
+        <div class="form-group">
+            <p>-</p>
+            <p>-</p>
+            <button type="submit" class="btn btn-default" style="padding-left: 85px; padding-right:85px; height:52px; padding-left:92px; padding-right:92px;">Submit Order</button>
+            @if (ViewBag.Sent == false)
+            {
+                <p class="successful" style="color:red; font-weight:bold;"><b>@ViewBag.Successful</b></p>
+            }
+            else
+            {
+                <p class="successful" style="color:green; font-weight:bold;"><b>@ViewBag.Successful</b></p>
+
+            }
+
+        </div>
+
+    </form>
+    <script>
+        // Get the modal
+        $("#pizzaName").change(function () {
+
+            var value = $(this).val();
+            console.log(value);
+            // value = { value: value }
+            var formData = new FormData();
+            formData.append('value', value)
+            $.ajax({
+                url: "http://localhost:51960/Home/GetPrice",
+                type: 'Post',
+                //  data: { value: value },
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: formData,
+                success: function (data) {
+                    //  debugger
+                    //var returnData = Json.parse(data);
+                    console.log(data)
+                    $("#displayPrice").text(data.price)
+
+                }
+            })
+
+        });
+
+        $("#size").change(function () {
+            debugger
+            var size = $(this).val();
+            var currentPrice = document.getElementById("displayPrice").innerHTML;
+            // console.log(current);
+            // value = { value: value }
+            var formData = new FormData();
+            formData.append('size', size);
+            formData.append('currentPrice', currentPrice)
+
+            $.ajax({
+                url: "http://localhost:51960/Home/GetPriceOnSize",
+                type: 'Post',
+                //  data: { value: value },
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: formData,
+                success: function (data) {
+                    //  debugger
+                    //var returnData = Json.parse(data);
+                    console.log(data)
+                    document.getElementById("displayPrice").innerText = data.price;
+                }
+            })
+
+
+        });
+        $("#topping").change(function () {
+            debugger
+            var topping = $(this).val();
+            var currentPrice = document.getElementById("displayPrice").innerHTML;
+            console.log(topping);
+            // value = { value: value }
+            var formData = new FormData();
+            formData.append('topping', topping);
+            formData.append('currentPrice', currentPrice)
+
+            $.ajax({
+                url: "http://localhost:51960/Home/GetPriceOnTopping",
+                type: 'Post',
+                //  data: { value: value },
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: formData,
+                success: function (data) {
+                    //  debugger
+                    //var returnData = Json.parse(data);
+                    console.log(data)
+                    document.getElementById("displayPrice").innerText = data.price;
+                }
+            })
+
+
+        });
+        $("#drink").change(function () {
+            debugger
+            var drink = $(this).val();
+            var currentPrice = document.getElementById("displayPrice").innerHTML;
+            console.log(drink);
+            // value = { value: value }
+            var formData = new FormData();
+            formData.append('drink', drink);
+            formData.append('currentPrice', currentPrice)
+
+            $.ajax({
+                url: "http://localhost:51960/Home/GetPriceOnSelectedFlavour",
+                type: 'Post',
+                //  data: { value: value },
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: formData,
+                success: function (data) {
+                    //  debugger
+                    //var returnData = Json.parse(data);
+                    console.log(data)
+                    document.getElementById("displayPrice").innerText = data.price;
+                }
+            })
+
+
+        });
+        //$("#topping").change(function () {
+        //    debugger
+        //    var topping = $(this).val();
+        //    var currentPrice = document.getElementById("displayPrice").innerHTML;
+        //    console.log(topping);
+        //    // value = { value: value }
+        //    var formData = new FormData();
+        //    formData.append('topping', topping);
+        //    formData.append('currentPrice', currentPrice)
+
+        //    $.ajax({
+        //        url: "http://localhost:51960/Home/GetPriceOnTopping",
+        //        type: 'Post',
+        //        //  data: { value: value },
+        //        cache: false,
+        //        contentType: false,
+        //        processData: false,
+        //        data: formData,
+        //        success: function (data) {
+        //            //  debugger
+        //            //var returnData = Json.parse(data);
+        //            console.log(data)
+        //            document.getElementById("displayPrice").innerText = data.price;
+        //        }
+        //    })
+
+
+        //});
+    </script>

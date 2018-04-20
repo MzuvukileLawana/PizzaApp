@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "UpdatePizza";
+    Layout = "~/Views/Shared/AdminNavBar.cshtml";
+}
+
+<div class="startYourOrder" style="height:50px; background:#040000; color: #f8d514;  margin: 10px; font-size:35px;font-weight:bold; text-align:center; ">
+    <p>Update Pizza Price</p>
+</div>
+<div class="col-md-12">
+    <form class="modal-content animate" action="/AdminPage/UpdatePizza" method="post">
+        <div class="col-md-6">
+            <div class="form-group" style="padding-top:20px;font-size:20px; padding-left:13px;">
+                <label for="subject"><b>Select Pizza:</b></label>
+                <select class="form-control" id="pizzaName" name="pizzaName" required="required" style="width:1000px;">
+                    <option>Select from here</option>
+                    <option>Chicken & Mushroom Pizza</option>
+                    <option>BBQ Chicken Pizza</option>
+                    <option>Maxican Fiasta Pizza</option>
+                    <option>Something Meaty Pizza</option>
+                    <option>Vegetarian Pzza</option>
+                    <option>Speciality Pizza</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group" style="padding-top:20px;font-size:20px; padding-left:13px;">
+                <label for="name"><b>New Price:</b></label><br />
+                <input type="number" class="form-control" id="price" name="price" placeholder="Enter new price" required="required">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-default " style="background: #f8d514">Update</button>
+        </form>
+</div>
+
